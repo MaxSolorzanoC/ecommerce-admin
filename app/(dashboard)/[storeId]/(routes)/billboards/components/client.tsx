@@ -9,10 +9,10 @@ import { DataTable } from "@/components/ui/data-table";
 import { ApiList } from "@/components/ui/api-list";
 import { Separator } from "@/components/ui/separator";
 
-import { BillboardCollumn, columns } from "./columns";
+import { BillboardColumn, columns } from "./columns";
 
 interface BillboardClientProps {
-    data: BillboardCollumn[]
+    data: BillboardColumn[]
 }
 
 export const BillboardClient: React.FC<BillboardClientProps> = ({

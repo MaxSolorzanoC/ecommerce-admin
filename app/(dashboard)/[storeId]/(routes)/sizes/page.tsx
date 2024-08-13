@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import { SizeClient } from "./components/client";
 
 import prismadb from "@/lib/prismadb";
-import { SizeCollumn } from "./components/columns";
+import { SizeColumn } from "./components/columns";
 
 const SizesPage = async ({
     params
@@ -19,7 +19,7 @@ const SizesPage = async ({
         }
     });
 
-    const formattedSizes: SizeCollumn[] = sizes.map((item) => ({
+    const formattedSizes: SizeColumn[] = sizes.map((item) => ({
         id: item.id,
         name: item.name,
         value: item.value,

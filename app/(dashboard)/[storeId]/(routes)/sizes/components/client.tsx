@@ -9,10 +9,10 @@ import { DataTable } from "@/components/ui/data-table";
 import { ApiList } from "@/components/ui/api-list";
 import { Separator } from "@/components/ui/separator";
 
-import { SizeCollumn, columns } from "./columns";
+import { SizeColumn, columns } from "./columns";
 
 interface SizeClientProps {
-    data: SizeCollumn[]
+    data: SizeColumn[]
 }
 
 export const SizeClient: React.FC<SizeClientProps> = ({
