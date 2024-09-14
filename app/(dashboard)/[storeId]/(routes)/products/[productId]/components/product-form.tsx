@@ -3,7 +3,7 @@
 import { useState } from "react";
 import * as z from "zod";
 import axios from "axios";
-import { Category, Color, Image, Product, Size } from "@prisma/client";
+import { Category, Color, Image, Product } from "@prisma/client";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
@@ -34,7 +34,7 @@ const formSchema = z.object({
     price: z.coerce.number(),
     categoryId: z.string().min(1),
     colorId: z.string().min(1),
-    sizeId: z.string().min(1),
+    size: z.string().min(1),
     isFeatured: z.boolean().default(false).optional(),
     isArchived: z.boolean().default(false).optional(),
 });
@@ -45,7 +45,7 @@ interface ProductFormProps {
     } | null;
     categories: Category[];
     colors: Color[];
-    sizes: Size[];
+    // sizes: string[];
 }
 
 type ProductFormValues = z.infer<typeof formSchema>;
@@ -54,7 +54,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
     initialData,
     categories,
     colors,
-    sizes,
+    // sizes,
 }) => {
     const params = useParams();
     const router = useRouter();
@@ -78,7 +78,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             price: 0,
             categoryId: '',
             colorId: '',
-            sizeId: '',
+            // size: '',
             isFeatured: false,
             isArchived: false,
         },
@@ -216,9 +216,9 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                                 </FormItem>
                             )}
                         />
-                        <FormField 
+                        {/* <FormField 
                             control={form.control}
-                            name="sizeId"
+                            name="size"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Size</FormLabel>
@@ -231,10 +231,10 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                                             <SelectContent>
                                                 {sizes.map((size) => (
                                                     <SelectItem
-                                                        key={size.id}
-                                                        value={size.id}
+                                                        key={size}
+                                                        value={size}
                                                     >
-                                                        {size.name}
+                                                        {size}
                                                     </SelectItem>
                                                 ))}
                                             </SelectContent>
@@ -242,7 +242,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                                     <FormMessage />
                                 </FormItem>
                             )}
-                        />
+                        /> */}
                         <FormField 
                             control={form.control}
                             name="colorId"

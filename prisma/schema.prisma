@@ -19,7 +19,7 @@ model Store {
   userId      String
   billboards  Billboard[] @relation("StoreToBillboard")
   categories  Category[]  @relation("StoreToCategory")
-  sizes       Size[]      @relation("StoreToSize")
+  // sizes       Size[]      @relation("StoreToSize")
   colors      Color[]     @relation("StoreToColor")
   products    Product[]   @relation("StoreToProduct")
   orders      Order[]     @relation("StoreToOrder")
@@ -55,18 +55,18 @@ model Category {
   @@index([billboardId])
 }
 
-model Size {
-  id          String      @id @default(uuid())
-  storeId     String
-  store       Store       @relation("StoreToSize", fields: [storeId], references: [id])
-  name        String
-  value       String
-  products    Product[]
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
+// model Size {
+//   id          String      @id @default(uuid())
+//   storeId     String
+//   store       Store       @relation("StoreToSize", fields: [storeId], references: [id])
+//   name        String
+//   value       String
+//   products    Product[]
+//   createdAt   DateTime    @default(now())
+//   updatedAt   DateTime    @updatedAt
 
-  @@index([storeId])
-}
+//   @@index([storeId])
+// }
 
 model Color {
   id          String      @id @default(uuid())
@@ -91,8 +91,9 @@ model Product {
   price       Decimal
   isFeatured  Boolean     @default(false)
   isArchived  Boolean     @default(false)
-  sizeId      String
-  size        Size        @relation(fields: [sizeId], references: [id])
+  // sizeId      String
+  // size        Size        @relation(fields: [sizeId], references: [id])
+  // size        String
   colorId     String
   color       Color       @relation(fields: [colorId], references: [id])
   images      Image[]
@@ -102,7 +103,7 @@ model Product {
 
   @@index([storeId])
   @@index([categoryId])
-  @@index([sizeId])
+  // @@index([sizeId])
   @@index([colorId])
 }
 
@@ -124,6 +125,7 @@ model Order {
   orderItems  OrderItem[] 
   isPaid      Boolean     @default(false)
   phone       String      @default("")
+  size        String
   address     String      @default("")
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt

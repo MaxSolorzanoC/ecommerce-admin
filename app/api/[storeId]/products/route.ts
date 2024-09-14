@@ -15,7 +15,7 @@ export async function POST(
             price,
             categoryId,
             colorId,
-            sizeId,
+            // sizeId,
             images,
             isFeatured,
             isArchived
@@ -41,9 +41,9 @@ export async function POST(
             return new NextResponse("Category id is required", { status: 400 });
         }
 
-        if (!sizeId) {
-            return new NextResponse("Size id is required", { status: 400 });
-        }
+        // if (!sizeId) {
+        //     return new NextResponse("Size id is required", { status: 400 });
+        // }
 
         if (!colorId) {
             return new NextResponse("Color id is required", { status: 400 });
@@ -72,7 +72,7 @@ export async function POST(
                 isArchived,
                 categoryId,
                 colorId,
-                sizeId,
+                // sizeId,
                 storeId: params.storeId,
                 images: {
                     createMany: {
@@ -111,7 +111,7 @@ export async function GET(
                 storeId: params.storeId,
                 categoryId,
                 colorId,
-                sizeId,
+                // sizeId,
                 isFeatured: isFeatured? true : undefined,
                 isArchived: false,
             },
@@ -119,7 +119,7 @@ export async function GET(
                 images: true,
                 category: true,
                 color: true,
-                size: true,
+                // size: true,
             },
             orderBy: {
                 createdAt: 'desc'
