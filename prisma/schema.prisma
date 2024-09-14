@@ -125,7 +125,6 @@ model Order {
   orderItems  OrderItem[] 
   isPaid      Boolean     @default(false)
   phone       String      @default("")
-  size        String
   address     String      @default("")
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
@@ -135,6 +134,7 @@ model Order {
 
 model OrderItem {
   id          String      @id @default(uuid())
+  size        String
   orderId     String
   order       Order       @relation(fields: [orderId], references: [id])
   productId   String      

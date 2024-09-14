@@ -19,16 +19,16 @@ export async function POST (
     req: Request,
     { params }: { params: { storeId: string } }
 ) {
-    const { productIds } = await req.json();
+    const { cartItems } = await req.json();
 
-    if(!productIds || productIds.length === 0) {
-        return new NextResponse("Product ids are required", { status: 400 });
+    if(!cartItems || cartItems.length === 0) {
+        return new NextResponse("Cart items are required", { status: 400 });
     }
 
     const products = await prismadb.product.findMany({
         where: {
             id: {
-                in: productIds
+                in: cartItems.id
             }
         }
     })
@@ -53,12 +53,16 @@ export async function POST (
             storeId: params.storeId,
             isPaid: false,
             orderItems: {
-                create: productIds.map((productId: string) => ({
+                create: cartItems.map((item: {
+                    id: string,
+                    size: string
+                }) => ({
                     product: {
                         connect: {
-                            id: productId
-                        }
-                    }
+                            id: item.id,
+                        },
+                    },
+                    size: item.size,
                 }))
             }
         }

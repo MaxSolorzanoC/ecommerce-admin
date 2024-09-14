@@ -34,7 +34,7 @@ const formSchema = z.object({
     price: z.coerce.number(),
     categoryId: z.string().min(1),
     colorId: z.string().min(1),
-    size: z.string().min(1),
+    // size: z.string().min(1),
     isFeatured: z.boolean().default(false).optional(),
     isArchived: z.boolean().default(false).optional(),
 });
