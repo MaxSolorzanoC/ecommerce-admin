@@ -19,7 +19,7 @@ const OrdersPage = async ({
             orderItems: {
                 include: {
                     product: true
-                }
+                } 
             }
         },
         orderBy: {
@@ -32,10 +32,10 @@ const OrdersPage = async ({
         phone: item.phone,
         address: item.address,
         products: item.orderItems.map((orderItem) => `
-            ${orderItem.product.name} / ${orderItem.size} / [1]
-            `).join(''),//TODO: Make the quantity dynamic
+            ${orderItem.product.name} / ${orderItem.size} / [${orderItem.quantity}]
+            `).join(''),
         totalPrice: formatter.format(item.orderItems.reduce((total, item) => {
-            return total + Number(item.product.price)
+            return total + (Number(item.product.price) * item.quantity)
         }, 0)),
         isPaid: item.isPaid,
         createdAt: format(item.createdAt, "MMMM do, yyyy")

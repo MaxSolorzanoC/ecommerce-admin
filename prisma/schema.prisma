@@ -135,6 +135,7 @@ model Order {
 model OrderItem {
   id          String      @id @default(uuid())
   size        String
+  quantity    Int
   orderId     String
   order       Order       @relation(fields: [orderId], references: [id])
   productId   String      

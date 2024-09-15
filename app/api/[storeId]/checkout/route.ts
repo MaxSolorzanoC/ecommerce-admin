@@ -3,6 +3,8 @@ import { NextResponse } from "next/server";
 
 import { stripe } from "@/lib/stripe";
 import prismadb from "@/lib/prismadb";
+import { Category, Color } from "@prisma/client";
+import { array } from "zod";
 
 //Add the following because if we didn't we wouldn't be allowed to create a post request because we are not in the same origin, we are in diferent application to the frontend
 const corsHeaders = {
@@ -25,19 +27,29 @@ export async function POST (
         return new NextResponse("Cart items are required", { status: 400 });
     }
 
+    const productsId =  cartItems.map((item: any) => item.id)
+
     const products = await prismadb.product.findMany({
         where: {
             id: {
-                in: cartItems.id
-            }
-        }
+                in: productsId
+            },
+        }, 
     })
+
+    const formattedProducts = products.map((product) => (
+        {
+            ...product,
+            quantity: Number(cartItems.find((item: any) => item.id === product.id).quantity),
+        }
+    ))
 
     const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
 
-    products.forEach((product) => {
+
+    formattedProducts.forEach((product) => {
         line_items.push({
-            quantity: 1,
+            quantity: product.quantity,
             price_data: {
                 currency: 'USD',
                 product_data: {
@@ -55,7 +67,8 @@ export async function POST (
             orderItems: {
                 create: cartItems.map((item: {
                     id: string,
-                    size: string
+                    size: string,
+                    quantity: string
                 }) => ({
                     product: {
                         connect: {
@@ -63,6 +76,7 @@ export async function POST (
                         },
                     },
                     size: item.size,
+                    quantity: Number(item.quantity),
                 }))
             }
         }
