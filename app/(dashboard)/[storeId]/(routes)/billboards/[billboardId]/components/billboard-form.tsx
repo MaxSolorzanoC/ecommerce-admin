@@ -26,7 +26,8 @@ import { AlertModal } from "@/components/modals/alert-modal";
 import ImageUpload from "@/components/ui/image-upload";
 
 const formSchema = z.object({
-    label: z.string().min(1),
+    label: z.string(),
+    name: z.string().min(1),
     imageUrl: z.string().min(1)
 });
 
@@ -54,6 +55,7 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
         resolver: zodResolver(formSchema),
         defaultValues: initialData || {
             label: '',
+            name: '',
             imageUrl: ''
         },
     });
@@ -136,6 +138,21 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
                             </FormItem>
                         )}
                     />
+                    <div className="grid grid-cols-3 gap-8">
+                        <FormField 
+                            control={form.control}
+                            name="name"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Name</FormLabel>
+                                    <FormControl>
+                                        <Input disabled={loading} placeholder="Billboard name" {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </div>
                     <div className="grid grid-cols-3 gap-8">
                         <FormField 
                             control={form.control}

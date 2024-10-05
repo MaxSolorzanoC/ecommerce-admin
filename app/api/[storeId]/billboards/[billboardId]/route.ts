@@ -35,14 +35,14 @@ export async function PATCH (
         const { userId } = auth()
         const body = await req.json();
 
-        const { label, imageUrl } = body;
+        const { name, label, imageUrl } = body;
 
         if (!userId) {
             return new NextResponse("Unauthenticated", { status: 401 })
         }
 
-        if (!label) {
-            return new NextResponse("Label is required", { status: 400 })
+        if (!name) {
+            return new NextResponse("Billboard name is required", { status: 400 })
         }
 
         if (!imageUrl) {
@@ -69,6 +69,7 @@ export async function PATCH (
                 id: params.billboardId,
             },
             data: {
+                name,
                 label,
                 imageUrl,
             }

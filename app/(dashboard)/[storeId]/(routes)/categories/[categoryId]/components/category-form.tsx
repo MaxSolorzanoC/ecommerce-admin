@@ -153,7 +153,7 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
                                                         key={billboard.id}
                                                         value={billboard.id}
                                                     >
-                                                        {billboard.label}
+                                                        {billboard.name}
                                                     </SelectItem>
                                                 ))}
                                             </SelectContent>

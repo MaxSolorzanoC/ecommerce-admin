@@ -6,10 +6,15 @@ import { CellAction } from "./cell-action"
 export type BillboardColumn = {
   id: string
   label: string
+  name: string
   createdAt: string
 }
 
 export const columns: ColumnDef<BillboardColumn>[] = [
+  {
+    accessorKey: "name",
+    header: "Name",
+  },
   {
     accessorKey: "label",
     header: "Label",
