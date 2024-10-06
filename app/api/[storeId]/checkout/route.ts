@@ -9,7 +9,7 @@ const corsHeaders = {
     'Access-Control-Allow-Origin' : 'https://born-young-shop.vercel.app',
     'Access-Control-Allow-Method': 'GET, POST, PUT, DELETE, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-    'Access-Control-Allow-Credentials': 'true',
+    'Cache-Control': 'no-store',  // Añade esto para evitar caching en Vercel
 }
 
 export async function OPTIONS() {
