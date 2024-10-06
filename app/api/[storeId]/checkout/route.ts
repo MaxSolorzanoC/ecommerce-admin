@@ -3,12 +3,10 @@ import { NextResponse } from "next/server";
 
 import { stripe } from "@/lib/stripe";
 import prismadb from "@/lib/prismadb";
-import { Category, Color } from "@prisma/client";
-import { array } from "zod";
 
 //Add the following because if we didn't we wouldn't be allowed to create a post request because we are not in the same origin, we are in diferent application to the frontend
 const corsHeaders = {
-    'Access-Control-Allow-Origin' : '*',
+    'Access-Control-Allow-Origin' : 'https://born-young-shop.vercel.app',
     'Access-Control-Allow-Method': 'GET, POST, PUT, DELETE, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, Authorization',
 }
