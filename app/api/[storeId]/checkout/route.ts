@@ -9,7 +9,6 @@ const corsHeaders = {
     'Access-Control-Allow-Origin' : '*',
     'Access-Control-Allow-Method': 'GET, POST, PUT, DELETE, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, Authorization, Origin',
-    'Cache-Control': 'no-store',  // Añade esto para evitar caching en Vercel
 }
 
 export async function OPTIONS() {
